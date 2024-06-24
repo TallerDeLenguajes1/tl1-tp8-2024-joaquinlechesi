@@ -6,5 +6,7 @@ public class Tarea {
     private string descripcion;
     private int duracion;
     //Constructor
-    
+    public void crearTarea(int id) {
+        tareaID = id;
+    }
 }
