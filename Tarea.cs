@@ -6,7 +6,16 @@ public class Tarea {
     private string descripcion;
     private int duracion;
     //Constructor
-    public void crearTarea(int id) {
-        tareaID = id;
+    public Tarea(int Id, string Descripcion, int Duracion) {
+        tareaID = Id;
+        descripcion = Descripcion;
+        duracion = Duracion;
+    }
+    //Propiedades
+    public int TareaID {
+        get => tareaID;
+    }
+    public string Descripcion {
+        get => descripcion; 
     }
 }

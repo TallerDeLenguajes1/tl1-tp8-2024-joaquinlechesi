@@ -1,27 +1,76 @@
-﻿using Tareas;
+﻿using System.Timers;
+using Tareas;
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Lista de Tareas:");
 //int nuevaTarea = new Tarea;
 
-List<Tarea> ListaTareas = new List<Tarea>();
+//List<Tarea> ListaTareas = new List<Tarea>();
+//List<Tarea> ListaRealizadas = new List<Tarea>();
+//void insertarTarea();
 
-void insertarTarea();
-
-string opcionString;
-int opcion;
+List<Empleado> empleados = new List<Empleado>();
+string opcionString, descripcionTarea, duracionTareaString, nombreEmpleado;
+int opcion, id = 0, duracionTareaInt;
 
 do
 {
-    Console.WriteLine("Ingrese una opcion numerica:\n1 para agregar una tarea\n2 para marcar una tarea pendiente como realizada\n3 para listar tareas pendientes y tareas realizadas\n4 para buscar una tarea por ID o por DESCRIPCION");
+    Console.WriteLine("Ingrese una opcion numerica:\n1 Agregar un empleado\n2 para listar los empleados con sus tareas.\n3 para marcar una tarea pendiente como realizada para un empleado\n4 para listar tareas pendientes y tareas realizadas por empleado\n5 para buscar una tarea por ID o por DESCRIPCION");
     opcionString = Console.ReadLine();
     int.TryParse(opcionString, out opcion);
     switch (opcion)
     {
         case 1:
-            
+            Console.WriteLine("Ingrese el nombre del empleado:");
+            nombreEmpleado = Console.ReadLine();
+            var listaVacia = new List<Tarea>();
+            Empleado nuevoEmpleado = new Empleado(nombreEmpleado, listaVacia, listaVacia);
+            for (int i = 0; i < 2; i++)
+            {
+                Console.WriteLine("Ingrese la descripcion de la tarea:");
+                descripcionTarea = Console.ReadLine();
+                Console.WriteLine("Ingrese la duracion de la tarea:");
+                duracionTareaString = Console.ReadLine();
+                int.TryParse(duracionTareaString, out duracionTareaInt);
+                Tarea nuevaTarea = new Tarea(id, descripcionTarea, duracionTareaInt);
+                nuevoEmpleado.TareasPendientes.Add(nuevaTarea);
+                id++;
+            }
+            empleados.Add(nuevoEmpleado);
+            // Console.WriteLine("Ingrese la descripcion de la tarea:");
+            // descripcionTarea = Console.ReadLine();
+            // Console.WriteLine("Ingrese la duracion de la tarea:");
+            // duracionTareaString = Console.ReadLine();
+            // int.TryParse(duracionTareaString, out duracionTareaInt);
+            // Tarea nuevaTarea = new Tarea(id, descripcionTarea, duracionTareaInt);
+            // ListaTareas.Add(nuevaTarea);
+            break;
+        case 2:
+            Console.WriteLine("Lista de empleados:");
+            foreach (var empleado in empleados)
+            {
+                Console.WriteLine(empleado.Nombre);
+                if (empleado.TareasPendientes.Count == 0)
+                {
+                    Console.WriteLine("Empleado sin tareas pendientes");
+                }else
+                {
+                    foreach (var Pendientes in empleado.TareasPendientes)
+                    {
+                        Console.WriteLine("ID: "+ Pendientes.TareaID + "\nDESCRIPCION: " + Pendientes.Descripcion);
+                    }
+                }
+            }
+            break;
+        case 3:
+            foreach (var empleado in empleados)
+            {
+                
+            }
+            Console.WriteLine("");
             break;
         default:
             Console.WriteLine("Opcion incorrecta.");
             break;
     }
+    id++;
 } while (opcion != 0);
