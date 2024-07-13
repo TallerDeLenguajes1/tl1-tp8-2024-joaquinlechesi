@@ -1,5 +1,6 @@
 ﻿using System.Timers;
 using Tareas;
+using System;
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Lista de Tareas:");
 //int nuevaTarea = new Tarea;
@@ -11,7 +12,8 @@ Console.WriteLine("Lista de Tareas:");
 List<Empleado> empleados = new List<Empleado>();
 string opcionString, descripcionTarea, duracionTareaString, nombreEmpleado;
 int opcion, id = 0, duracionTareaInt;
-
+//int numero
+Random aleatorio = new Random();
 do
 {
     Console.WriteLine("Ingrese una opcion numerica:\n1 Agregar un empleado\n2 para listar los empleados con sus tareas.\n3 para marcar una tarea pendiente como realizada para un empleado\n4 para listar tareas pendientes y tareas realizadas por empleado\n5 para buscar una tarea por ID o por DESCRIPCION");
@@ -45,18 +47,24 @@ do
             // ListaTareas.Add(nuevaTarea);
             break;
         case 2:
-            Console.WriteLine("Lista de empleados:");
-            foreach (var empleado in empleados)
+            if (empleados.Count == 0)
             {
-                Console.WriteLine(empleado.Nombre);
-                if (empleado.TareasPendientes.Count == 0)
+                Console.WriteLine("No hay empleados cargados.");
+            }else
+            {
+                Console.WriteLine("Lista de empleados:");
+                foreach (var empleado in empleados)
                 {
-                    Console.WriteLine("Empleado sin tareas pendientes");
-                }else
-                {
-                    foreach (var Pendientes in empleado.TareasPendientes)
+                    Console.WriteLine(empleado.Nombre);
+                    if (empleado.TareasPendientes.Count == 0)
                     {
-                        Console.WriteLine("ID: "+ Pendientes.TareaID + "\nDESCRIPCION: " + Pendientes.Descripcion);
+                        Console.WriteLine("Empleado sin tareas pendientes");
+                    }else
+                    {
+                        foreach (var Pendientes in empleado.TareasPendientes)
+                        {
+                            Console.WriteLine("ID DE LA TAREA: "+ Pendientes.TareaID + "\nDESCRIPCION DE LA TAREA: " + Pendientes.Descripcion);
+                        }
                     }
                 }
             }
