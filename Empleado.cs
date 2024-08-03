@@ -17,5 +17,9 @@ public class Empleado {  //MOLDE
     //PROPIEDADES
     public List<Tarea> TareasPendientes {
         get => tareasPendientes;
+        //set => tareasPendientes;
+    }
+    public List<Tarea> TareasRealizdas {
+        get => tareasRealizadas;
     }
 }

@@ -10,8 +10,8 @@ Console.WriteLine("Lista de Tareas:");
 //void insertarTarea();
 
 List<Empleado> empleados = new List<Empleado>();
-string opcionString, descripcionTarea, duracionTareaString, nombreEmpleado;
-int opcion, id = 0, duracionTareaInt;
+string opcionString, descripcionTarea, duracionTareaString, nombreEmpleado, idSelecion;
+int opcion, id = 0, idSeleccionInt = 0, duracionTareaInt;
 //int numero
 Random aleatorio = new Random();
 do
@@ -70,9 +70,34 @@ do
             }
             break;
         case 3:
+            Console.WriteLine("Lista de empleados:");
             foreach (var empleado in empleados)
             {
+                Console.WriteLine(empleado.Nombre);
+                Console.WriteLine("Ingrese el ID de tarea pendiente que desea marcar como realizada:");
+                foreach (var tareaPendiente in empleado.TareasPendientes)
+                {
+                    Console.WriteLine("ID DE LA TAREA: "+ tareaPendiente.TareaID + "\nDESCRIPCION DE LA TAREA: " + tareaPendiente.Descripcion);
+                }
+            }
+            idSelecion = Console.ReadLine();
+            int.TryParse(idSelecion, out idSeleccionInt);
+            // foreach (var tareaPendiente in empleado.TareasPendientes)
+            // {
                 
+            // }
+            foreach (var empleado in empleados)
+            {
+                //Console.WriteLine(empleado.Nombre);
+                //Console.WriteLine("Ingrese el ID de tarea pendiente que desea marcar como realizada:");
+                foreach (var tareaPendiente in empleado.TareasPendientes)
+                {
+                    if (tareaPendiente.TareaID == idSeleccionInt)
+                    {
+                        empleado.TareasRealizdas.Add(tareaPendiente);
+                        empleado.TareasPendientes.Remove(tareaPendiente);
+                    }
+                }
             }
             Console.WriteLine("");
             break;
